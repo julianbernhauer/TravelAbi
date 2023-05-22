@@ -11,7 +11,7 @@ import SwiftUI
 struct TravelAbiApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            StartView()
         }
     }
 }
