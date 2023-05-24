@@ -7,14 +7,15 @@
 
 import Foundation
 
-struct oldAssFlight: Hashable {
+struct FlightModel: Hashable {
     var sIATA: String
     var sDepartureAirport: String
     var sArrivalAirport: String
     var sDepartureTime: String
     var sArrivaltime: String
     var delay: String
-    static func preview() -> [oldAssFlight] {
-        [oldAssFlight(sIATA: "EW2520", sDepartureAirport: "STR", sArrivalAirport: "BCN", sDepartureTime: "dep Time", sArrivaltime: "arrv Time", delay: "0")]
+    var sDepGate: String
+    static func preview() -> [FlightModel] {
+        [FlightModel(sIATA: "EW2520", sDepartureAirport: "STR", sArrivalAirport: "BCN", sDepartureTime: "dep Time", sArrivaltime: "arrv Time", delay: "0", sDepGate: "0")]
     }
 }

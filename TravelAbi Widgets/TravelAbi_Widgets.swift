@@ -8,6 +8,7 @@
 import WidgetKit
 import SwiftUI
 import Intents
+import CoreData
 
 struct Provider: IntentTimelineProvider {
     func placeholder(in context: Context) -> SimpleEntry {
@@ -42,7 +43,8 @@ struct SimpleEntry: TimelineEntry {
 
 struct TravelAbi_WidgetsEntryView : View {
         @Environment(\.widgetFamily) var widgetFamily
-    
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: []) var fetchFlights: FetchedResults<Flights> 
         var body: some View {
         switch widgetFamily {
         case .accessoryCircular:
@@ -53,22 +55,16 @@ struct TravelAbi_WidgetsEntryView : View {
                 .gaugeStyle(.accessoryCircularCapacity)
             }
         case .accessoryInline:
-            Text("3 undone todos")
+            Text("ur mom")
         case .accessoryRectangular:
             VStack {
-                HStack {
-                    Image(systemName: "square")
-                    Text("Pick up the milk")
-         .font(.headline)
-                        .widgetAccentable()
-                }
-                HStack {
-                    Image(systemName: "square")
-                    Text("Take out the trash")
-                }
-                HStack {
-                    Image(systemName: "square")
-                    Text("Feed the cat")
+
+                    HStack {
+                        Image(systemName: "airplane.departure")
+                        Text("2")
+                            .font(.headline)
+                            .widgetAccentable()
+                    
                 }
             }
             .privacySensitive()

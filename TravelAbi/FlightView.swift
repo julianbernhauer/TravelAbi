@@ -27,12 +27,16 @@ struct FlightView: View {
                     ForEach(fetchFlights) { FFlights in
                         HStack {
                             Image(systemName: "airplane.departure")
-                            VStack(alignment: .center){
+                            VStack(alignment: .leading){
                                 Text("departure: " + (FFlights.dep_Airport ?? "depAiport NA")) + Text(" ") + Text(FFlights.dep_Time ?? "depTime NA")
                                 
                                 Text("arrival: " + (FFlights.arr_Airport ?? "arrAirport NA")) + Text(" ") + Text(FFlights.arr_Time ?? "arrTime NA")
                             }
-                            Text("delay: ") + Text(FFlights.delay ?? "delay NA")
+                            VStack{
+                                Text("delay: ") + Text(FFlights.delay ?? "delay NA")
+                                Text("dep gate: ") + Text(FFlights.dep_Gate ?? "")
+                            }
+
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(action: {
@@ -46,6 +50,7 @@ struct FlightView: View {
                             
                         }
                     }
+                    
                 }
                 
                 
@@ -53,7 +58,7 @@ struct FlightView: View {
             .navigationTitle("Flights")
             .onSubmit {
                 Task{
-                    await getFlightData()
+                    await testP()
                 }
             }
         }
@@ -61,14 +66,13 @@ struct FlightView: View {
     
     
     
-    
-    
+
     
     func getFlightData() async{
         
         //
         let flight = Flights(context: moc)
-        let apiHandler = apiHandling(flightIATA: flightCode, delayed: 0)
+        let apiHandler = apiHandling(flightIATA: flightCode, delayed: 0, depGate: "")
         apiHandler.getFlightData(flightIATA: flightCode) { plight in
             if let plight = plight {
                 // Flight data retrieved successfully
@@ -80,7 +84,7 @@ struct FlightView: View {
                 flight.dep_Airport = plight.sDepartureAirport
                 flight.dep_Time = plight.sDepartureTime
                 flight.delay = plight.delay
-                
+                flight.dep_Gate = plight.sDepGate
                 try? moc.save()
             } else {
                 // Error occurred or no flight data available
@@ -104,9 +108,12 @@ struct FlightView: View {
     }
     
     
+
+    
+    
     func testP(){
         
-        let dataCall = apiHandling(flightIATA: flightCode, delayed: 0)
+        let dataCall = apiHandling(flightIATA: flightCode, delayed: 0, depGate: "")
         //dataCall.getFlightData(flightIATA: answer)
         let test = dataCall.readJSONFile()
         //arrayHelper.addFlight(flight: (test)!)

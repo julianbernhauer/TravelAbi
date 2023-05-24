@@ -12,6 +12,7 @@ struct HomeView: View {
     @Environment(\.isEnabled) private var isEnabled
     
     var body: some View {
+        //TODO list, literally
         
         NavigationView{
                 VStack {

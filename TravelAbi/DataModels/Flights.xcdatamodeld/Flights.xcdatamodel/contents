@@ -5,7 +5,9 @@
         <attribute name="arr_Time" optional="YES" attributeType="String"/>
         <attribute name="delay" optional="YES" attributeType="String"/>
         <attribute name="dep_Airport" optional="YES" attributeType="String"/>
+        <attribute name="dep_Gate" optional="YES" attributeType="String"/>
         <attribute name="dep_Time" optional="YES" attributeType="String"/>
+        <attribute name="flight_aita" optional="YES" attributeType="String"/>
         <attribute name="iata" optional="YES" attributeType="String"/>
     </entity>
 </model>
