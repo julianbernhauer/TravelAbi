@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct TravelAbiApp: App {
+    @StateObject var dataController = DataController.shared
     var body: some Scene {
         WindowGroup {
             StartView()
+                .environment(\.managedObjectContext, dataController.container.viewContext)
         }
     }
 }

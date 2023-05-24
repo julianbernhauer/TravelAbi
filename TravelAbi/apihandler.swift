@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import CoreData
 
 class apiHandling: ArrayHelper {
     var apiKey = ""
@@ -16,7 +17,9 @@ class apiHandling: ArrayHelper {
     var departureAirport = ""
     var arrivalAirport = ""
     var delayed: Int
-    var newFlight: Flight?
+    var newFlight: oldAssFlight?
+    
+ 
     
     
     init(apiKey: String = "", flightIATA: String = "", departure: String = "", arrival: String = "", departureAirport: String = "", arrivalAirport: String = "", delayed: Int) {
@@ -29,7 +32,7 @@ class apiHandling: ArrayHelper {
         self.delayed = delayed
     }
     
-    func getFlightData(flightIATA: String, completion: @escaping (Flight?) -> Void) {
+    func getFlightData(flightIATA: String, completion: @escaping (oldAssFlight?) -> Void) {
         let prefixURL = "https://airlabs.co/api/v9/flight?flight_iata="
         let postfixURL = "&api_key=84070674-82b7-4c95-950e-219f4d310f95"
         let combinedUrl = prefixURL + flightIATA + postfixURL
@@ -76,7 +79,7 @@ class apiHandling: ArrayHelper {
                 print(self.formatDate(givenDateTime: self.departure))
                 
                 
-                let newFlight = Flight(sIATA: flightIATA, sDepartureAirport: self.departureAirport, sArrivalAirport: self.arrivalAirport, sDepartureTime: self.formatDate(givenDateTime: self.departure), sArrivaltime: self.formatDate(givenDateTime: self.arrival), delay: String(self.delayed))
+                let newFlight = oldAssFlight(sIATA: flightIATA, sDepartureAirport: self.departureAirport, sArrivalAirport: self.arrivalAirport, sDepartureTime: self.formatDate(givenDateTime: self.departure), sArrivaltime: self.formatDate(givenDateTime: self.arrival), delay: String(self.delayed))
                 self.addFlight(flight: newFlight)
                 
                 completion(newFlight)
@@ -93,7 +96,7 @@ class apiHandling: ArrayHelper {
     
     
     
-    func readJSONFile() -> Flight? {
+    func readJSONFile() -> oldAssFlight? {
         do {
             if let bundlePath = Bundle.main.path(forResource: "responseFl", ofType: "json"),
                let jsonData = try String(contentsOfFile: bundlePath).data(using: .utf8) {
@@ -116,7 +119,7 @@ class apiHandling: ArrayHelper {
                 let arrivalTime = self.formatDate(givenDateTime: self.arrival)
                 print(arrivalTime)
                 
-                let newFlight = Flight(sIATA: flightIATA, sDepartureAirport: self.departureAirport, sArrivalAirport: self.arrivalAirport, sDepartureTime: self.formatDate(givenDateTime: self.departure), sArrivaltime: arrivalTime, delay: String(self.delayed))
+                let newFlight = oldAssFlight(sIATA: flightIATA, sDepartureAirport: self.departureAirport, sArrivalAirport: self.arrivalAirport, sDepartureTime: self.formatDate(givenDateTime: self.departure), sArrivaltime: arrivalTime, delay: String(self.delayed))
                 self.addFlight(flight: newFlight)
                 print(flights)
                 

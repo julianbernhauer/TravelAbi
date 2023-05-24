@@ -32,6 +32,8 @@
 		E9C421EF2A1BF1E900DE9B48 /* FlightData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C421EE2A1BF1E900DE9B48 /* FlightData.swift */; };
 		E9C421F12A1BFC6100DE9B48 /* HelperClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C421F02A1BFC6100DE9B48 /* HelperClass.swift */; };
 		E9C421F32A1C1FD100DE9B48 /* responseFl.json in Resources */ = {isa = PBXBuildFile; fileRef = E9C421F22A1C1FD100DE9B48 /* responseFl.json */; };
+		E9D3E55B2A1E89CD00A56B7C /* Flights.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E9D3E5592A1E89CD00A56B7C /* Flights.xcdatamodeld */; };
+		E9D3E55F2A1E8D7C00A56B7C /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D3E55E2A1E8D7C00A56B7C /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +103,8 @@
 		E9C421EE2A1BF1E900DE9B48 /* FlightData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlightData.swift; sourceTree = "<group>"; };
 		E9C421F02A1BFC6100DE9B48 /* HelperClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperClass.swift; sourceTree = "<group>"; };
 		E9C421F22A1C1FD100DE9B48 /* responseFl.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = responseFl.json; path = ../../../Desktop/responseFl.json; sourceTree = "<group>"; };
+		E9D3E55A2A1E89CD00A56B7C /* Flights.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Flights.xcdatamodel; sourceTree = "<group>"; };
+		E9D3E55E2A1E8D7C00A56B7C /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +167,7 @@
 		E9C421932A1BBAA600DE9B48 /* TravelAbi */ = {
 			isa = PBXGroup;
 			children = (
+				E9D3E5582A1E892A00A56B7C /* DataModels */,
 				E9C421F22A1C1FD100DE9B48 /* responseFl.json */,
 				E9C421EE2A1BF1E900DE9B48 /* FlightData.swift */,
 				E9C421E02A1BCACE00DE9B48 /* apihandler.swift */,
@@ -225,6 +230,15 @@
 				E9C421D22A1BBB3D00DE9B48 /* Info.plist */,
 			);
 			path = "TravelAbi Widgets";
+			sourceTree = "<group>";
+		};
+		E9D3E5582A1E892A00A56B7C /* DataModels */ = {
+			isa = PBXGroup;
+			children = (
+				E9D3E5592A1E89CD00A56B7C /* Flights.xcdatamodeld */,
+				E9D3E55E2A1E8D7C00A56B7C /* DataController.swift */,
+			);
+			path = DataModels;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -398,7 +412,9 @@
 				E9C421D42A1BBB3D00DE9B48 /* TravelAbi_Widgets.intentdefinition in Sources */,
 				E9C421F12A1BFC6100DE9B48 /* HelperClass.swift in Sources */,
 				E9C421E62A1BCE6600DE9B48 /* ResponseModel.swift in Sources */,
+				E9D3E55B2A1E89CD00A56B7C /* Flights.xcdatamodeld in Sources */,
 				E9C421EC2A1BEB9C00DE9B48 /* FlightView.swift in Sources */,
+				E9D3E55F2A1E8D7C00A56B7C /* DataController.swift in Sources */,
 				E9C421952A1BBAA600DE9B48 /* TravelAbiApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -805,6 +821,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		E9D3E5592A1E89CD00A56B7C /* Flights.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				E9D3E55A2A1E89CD00A56B7C /* Flights.xcdatamodel */,
+			);
+			currentVersion = E9D3E55A2A1E89CD00A56B7C /* Flights.xcdatamodel */;
+			path = Flights.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = E9C421892A1BBAA600DE9B48 /* Project object */;
 }

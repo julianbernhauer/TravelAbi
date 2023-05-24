@@ -7,14 +7,14 @@
 
 import Foundation
 class ArrayHelper: ObservableObject {
-    @Published var flights: [Flight] = [Flight(sIATA: "AITA", sDepartureAirport: "FRA", sArrivalAirport: "LAX", sDepartureTime: "02:22", sArrivaltime: "12:00", delay: "none")]
-    @Published var flights2 = Flight.preview()
+    @Published var flights: [oldAssFlight] = [oldAssFlight(sIATA: "AITA", sDepartureAirport: "FRA", sArrivalAirport: "LAX", sDepartureTime: "02:22", sArrivaltime: "12:00", delay: "none")]
+    @Published var flights2 = oldAssFlight.preview()
 
     
-    func addFlight(flight: Flight){
+    func addFlight(flight: oldAssFlight){
         flights.append(flight)
     }
-    func getAllFlights() -> [Flight]{
+    func getAllFlights() -> [oldAssFlight]{
         return flights
     }
     

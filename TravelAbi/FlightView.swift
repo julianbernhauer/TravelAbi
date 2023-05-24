@@ -7,11 +7,15 @@
 
 import SwiftUI
 import Combine
+import CoreData
 
 struct FlightView: View {
+    @Environment(\.managedObjectContext) var moc
+    @FetchRequest(sortDescriptors: []) var fetchFlights: FetchedResults<Flights>
+
+    
     @State var flightIATA: String = ""
     @State var flightCode: String = ""
-    @State var listID = 1
     @ObservedObject var arrayHelper = ArrayHelper()
     var body: some View {
         NavigationStack{
@@ -20,25 +24,24 @@ struct FlightView: View {
                     TextField("Enter flight number", text: $flightCode)
                 }
                 Section{
-                    ForEach(arrayHelper.flights, id: \.sDepartureTime) { flight in
+                    ForEach(fetchFlights) { FFlights in
                         HStack {
                             Image(systemName: "airplane.departure")
                             VStack(alignment: .center){
-
-                                Text("departure: " + flight.sDepartureAirport + " " + flight.sDepartureTime)
-                                Text("arrival: " + flight.sArrivalAirport + " " + flight.sArrivaltime)
+                                Text("departure: " + (FFlights.dep_Airport ?? "depAiport NA")) + Text(" ") + Text(FFlights.dep_Time ?? "depTime NA")
+                                
+                                Text("arrival: " + (FFlights.arr_Airport ?? "arrAirport NA")) + Text(" ") + Text(FFlights.arr_Time ?? "arrTime NA")
                             }
-                            Text("delay: " + flight.delay)
+                            Text("delay: ")
                         }
                     }
                 }
             }
-                .id(listID)
             
                 .navigationTitle("Flights")
                 .onSubmit {
                     Task{
-                        await getFlightData()
+                        await testP()
                     }
                 }
         }
@@ -79,6 +82,26 @@ struct FlightView: View {
         let test = dataCall.readJSONFile()
         arrayHelper.addFlight(flight: (test)!)
         */
+    }
+    
+    
+    func testP(){
+        
+        let dataCall = apiHandling(flightIATA: flightCode, delayed: 0)
+        //dataCall.getFlightData(flightIATA: answer)
+        let test = dataCall.readJSONFile()
+        //arrayHelper.addFlight(flight: (test)!)
+        
+        let flight = Flights(context: moc)
+        flight.arr_Airport = test?.sArrivalAirport
+        flight.arr_Time = test?.sArrivaltime
+        flight.dep_Airport = test?.sDepartureAirport
+        flight.dep_Time = test?.sDepartureTime
+        flight.delay = test?.delay
+        
+        try? moc.save()
+        
+        
     }
 }
 struct FlightView_Previews: PreviewProvider {
