@@ -12,7 +12,7 @@ import CoreData
 struct FlightView: View {
     @Environment(\.managedObjectContext) var moc
     @FetchRequest(sortDescriptors: []) var fetchFlights: FetchedResults<Flights>
-
+    
     
     @State var flightIATA: String = ""
     @State var flightCode: String = ""
@@ -34,19 +34,27 @@ struct FlightView: View {
                             }
                             Text("delay: ")
                         }
+                        .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                            Button(action: {
+                                deleteFlight(at: fetchFlights.firstIndex(of: FFlights)!)
+                            }) {
+                                Label("Delete", systemImage: "trash")
+                            }
+                            .tint(.red)
+                        }
                     }
+                }
+                
+                
+            }
+            .navigationTitle("Flights")
+            .onSubmit {
+                Task{
+                    await testP()
                 }
             }
-            
-                .navigationTitle("Flights")
-                .onSubmit {
-                    Task{
-                        await testP()
-                    }
-                }
         }
     }
-    
     
     
     
@@ -57,31 +65,31 @@ struct FlightView: View {
         
         //
         
-         let apiHandler = apiHandling(flightIATA: flightCode, delayed: 0)
-         apiHandler.getFlightData(flightIATA: flightCode) { flight in
-         if let flight = flight {
-         // Flight data retrieved successfully
-         // Access the flight object and perform desired operations
-         arrayHelper.addFlight(flight: flight)
-         } else {
-         // Error occurred or no flight data available
-         // Handle the error or absence of data
-         print("Failed to retrieve flight data.")
-         }
-         }
-         
+        let apiHandler = apiHandling(flightIATA: flightCode, delayed: 0)
+        apiHandler.getFlightData(flightIATA: flightCode) { flight in
+            if let flight = flight {
+                // Flight data retrieved successfully
+                // Access the flight object and perform desired operations
+                arrayHelper.addFlight(flight: flight)
+            } else {
+                // Error occurred or no flight data available
+                // Handle the error or absence of data
+                print("Failed to retrieve flight data.")
+            }
+        }
+        
         //
         
         
         
         /*
-        
-        //JSON
-        let dataCall = apiHandling(flightIATA: flightCode, delayed: 0)
-        //dataCall.getFlightData(flightIATA: answer)
-        let test = dataCall.readJSONFile()
-        arrayHelper.addFlight(flight: (test)!)
-        */
+         
+         //JSON
+         let dataCall = apiHandling(flightIATA: flightCode, delayed: 0)
+         //dataCall.getFlightData(flightIATA: answer)
+         let test = dataCall.readJSONFile()
+         arrayHelper.addFlight(flight: (test)!)
+         */
     }
     
     
@@ -103,9 +111,23 @@ struct FlightView: View {
         
         
     }
+    
+    func deleteFlight(at index: Int) {
+        if let flight = fetchFlights[safe: index] {
+            moc.delete(flight)
+            try? moc.save()
+        }
+    }
 }
 struct FlightView_Previews: PreviewProvider {
     static var previews: some View {
         FlightView()
     }
 }
+
+extension Collection {
+    subscript(safe index: Index) -> Element? {
+        indices.contains(index) ? self[index] : nil
+    }
+}
+
