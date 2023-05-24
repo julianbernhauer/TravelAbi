@@ -21,34 +21,20 @@ struct FlightView: View {
                 }
                 Section{
                     ForEach(arrayHelper.flights, id: \.sDepartureTime) { flight in
-                        HStack{
-                            Text(flight.sDepartureAirport)
-                            Text(flight.sDepartureTime)
-                            Text(flight.sArrivalAirport)
-                            Text(flight.sArrivaltime)
-                            Text("delay:")
-                            Text(flight.delay)
-                            
-                        }
-                    }
-                }
-            }.id(listID)
-            
-                .toolbar{
-                    ToolbarItem(placement: .confirmationAction){
-                        
-                        
-                        Button{
-                            Task{
-                                
-                                
+                        HStack {
+                            Image(systemName: "airplane.departure")
+                            VStack(alignment: .center){
+
+                                Text("departure: " + flight.sDepartureAirport + " " + flight.sDepartureTime)
+                                Text("arrival: " + flight.sArrivalAirport + " " + flight.sArrivaltime)
                             }
-                        }label: {
-                            Label("Add", systemImage: "plus")
+                            Text("delay: " + flight.delay)
                         }
-                        
                     }
                 }
+            }
+                .id(listID)
+            
                 .navigationTitle("Flights")
                 .onSubmit {
                     Task{
@@ -61,12 +47,13 @@ struct FlightView: View {
     
     
     
-
+    
     
     
     func getFlightData() async{
         
-   //
+        //
+        
          let apiHandler = apiHandling(flightIATA: flightCode, delayed: 0)
          apiHandler.getFlightData(flightIATA: flightCode) { flight in
          if let flight = flight {
@@ -79,18 +66,19 @@ struct FlightView: View {
          print("Failed to retrieve flight data.")
          }
          }
-    //
          
-         
+        //
         
         
-/*
-         //JSON
+        
+        /*
+        
+        //JSON
         let dataCall = apiHandling(flightIATA: flightCode, delayed: 0)
-               //dataCall.getFlightData(flightIATA: answer)
-              let test = dataCall.readJSONFile()
+        //dataCall.getFlightData(flightIATA: answer)
+        let test = dataCall.readJSONFile()
         arrayHelper.addFlight(flight: (test)!)
-         */
+        */
     }
 }
 struct FlightView_Previews: PreviewProvider {
