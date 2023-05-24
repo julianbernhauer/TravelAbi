@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E979B27C2A1D16EB004C2865 /* thirdView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E979B27B2A1D16EB004C2865 /* thirdView.swift */; };
 		E9C421952A1BBAA600DE9B48 /* TravelAbiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C421942A1BBAA600DE9B48 /* TravelAbiApp.swift */; };
 		E9C421972A1BBAA600DE9B48 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9C421962A1BBAA600DE9B48 /* ContentView.swift */; };
 		E9C421992A1BBAA700DE9B48 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9C421982A1BBAA700DE9B48 /* Assets.xcassets */; };
@@ -72,6 +73,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		E979B27B2A1D16EB004C2865 /* thirdView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = thirdView.swift; sourceTree = "<group>"; };
 		E9C421912A1BBAA600DE9B48 /* TravelAbi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TravelAbi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9C421942A1BBAA600DE9B48 /* TravelAbiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelAbiApp.swift; sourceTree = "<group>"; };
 		E9C421962A1BBAA600DE9B48 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -162,17 +164,18 @@
 			isa = PBXGroup;
 			children = (
 				E9C421F22A1C1FD100DE9B48 /* responseFl.json */,
-				E9C421DE2A1BC39600DE9B48 /* HomeView.swift */,
 				E9C421EE2A1BF1E900DE9B48 /* FlightData.swift */,
 				E9C421E02A1BCACE00DE9B48 /* apihandler.swift */,
 				E9C421E52A1BCE6600DE9B48 /* ResponseModel.swift */,
+				E9C421F02A1BFC6100DE9B48 /* HelperClass.swift */,
 				E9C421942A1BBAA600DE9B48 /* TravelAbiApp.swift */,
 				E9C421962A1BBAA600DE9B48 /* ContentView.swift */,
 				E9C421982A1BBAA700DE9B48 /* Assets.xcassets */,
 				E9C4219A2A1BBAA700DE9B48 /* Preview Content */,
 				E9C421E92A1BE4CA00DE9B48 /* StartView.swift */,
+				E9C421DE2A1BC39600DE9B48 /* HomeView.swift */,
 				E9C421EB2A1BEB9C00DE9B48 /* FlightView.swift */,
-				E9C421F02A1BFC6100DE9B48 /* HelperClass.swift */,
+				E979B27B2A1D16EB004C2865 /* thirdView.swift */,
 			);
 			path = TravelAbi;
 			sourceTree = "<group>";
@@ -391,6 +394,7 @@
 				E9C421EA2A1BE4CA00DE9B48 /* StartView.swift in Sources */,
 				E9C421DF2A1BC39600DE9B48 /* HomeView.swift in Sources */,
 				E9C421EF2A1BF1E900DE9B48 /* FlightData.swift in Sources */,
+				E979B27C2A1D16EB004C2865 /* thirdView.swift in Sources */,
 				E9C421D42A1BBB3D00DE9B48 /* TravelAbi_Widgets.intentdefinition in Sources */,
 				E9C421F12A1BFC6100DE9B48 /* HelperClass.swift in Sources */,
 				E9C421E62A1BCE6600DE9B48 /* ResponseModel.swift in Sources */,

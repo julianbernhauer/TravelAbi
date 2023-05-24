@@ -1,13 +1,14 @@
 //
-//  HomeView.swift
+//  thirdView.swift
 //  TravelAbi
 //
-//  Created by Julian Bernhauer on 22.05.23.
+//  Created by Julian Bernhauer on 23.05.23.
 //
 
 import SwiftUI
 
-struct HomeView: View {
+
+struct thirdView: View  {
     @State var name: String = ""
     @Environment(\.isEnabled) private var isEnabled
     
@@ -15,13 +16,12 @@ struct HomeView: View {
         
         NavigationView{
                 VStack {
-                    
-                    Text("huh").padding(20)
-                    Image(systemName: "sun.max.fill")
+                    Text("kein wetter hier")
+                    Image(systemName: "cloud.bolt.fill")
 
                     
                 } .background(Color.white)
-                .navigationTitle("Welcome back")
+                .navigationTitle("Weather")
         }
     }
     
@@ -29,9 +29,9 @@ struct HomeView: View {
 
 }
 
-struct HomeView_Previews: PreviewProvider {
+struct thirdView_Previews: PreviewProvider {
     static var previews: some View {
-        HomeView()
+        thirdView()
     }
 }
 

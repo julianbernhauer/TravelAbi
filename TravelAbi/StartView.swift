@@ -12,16 +12,16 @@ struct StartView: View {
     var body: some View {
         TabView{
             HomeView()
-                .badge(2)
+                .badge(0)
                 .tabItem{
                     Label("Home", systemImage: "house")
                 }
             FlightView()
-                .badge(0)
+                .badge(69)
                 .tabItem{
                     Label("Flights", systemImage: "airplane")
                 }
-            HomeView()
+            thirdView()
                 .badge(0)
                 .tabItem{
                     Label("Weather", systemImage: "cloud.hail.fill")

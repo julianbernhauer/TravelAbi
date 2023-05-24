@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import Combine
 
 struct FlightView: View {
     @State var flightIATA: String = ""
     @State var flightCode: String = ""
-    var flights = ArrayHelper.init().flights
+    @State var listID = 1
+    @ObservedObject var arrayHelper = ArrayHelper()
     var body: some View {
         NavigationStack{
             List{
@@ -18,23 +20,23 @@ struct FlightView: View {
                     TextField("Enter flight number", text: $flightCode)
                 }
                 Section{
-                    ForEach(flights, id: \.sDepartureTime) { flights in
+                    ForEach(arrayHelper.flights, id: \.sDepartureTime) { flight in
                         HStack{
-                            Text(flights.sDepartureAirport)
-                            Text(flights.sDepartureTime)
-                            Text(flights.sArrivalAirport)
-                            Text(flights.sArrivaltime)
+                            Text(flight.sDepartureAirport)
+                            Text(flight.sDepartureTime)
+                            Text(flight.sArrivalAirport)
+                            Text(flight.sArrivaltime)
                             Text("delay:")
-                            Text(flights.delay)
+                            Text(flight.delay)
                             
                         }
                     }
                 }
-            }
-
+            }.id(listID)
+            
                 .toolbar{
                     ToolbarItem(placement: .confirmationAction){
-            
+                        
                         
                         Button{
                             Task{
@@ -47,30 +49,50 @@ struct FlightView: View {
                         
                     }
                 }
-            }.navigationTitle("Flights")
-            .onSubmit {
-                Task{
-                    await getFlightData()
+                .navigationTitle("Flights")
+                .onSubmit {
+                    Task{
+                        await getFlightData()
+                    }
                 }
-            }
         }
-
-
-        
-    
-    //functionality
-    func getFlightData() async{
-        print("nutten")
-        let answer = flightCode
-        let dataCall = apiHandling(flightIATA: answer, delayed: 0)
-        //dataCall.getFlightData(flightIATA: answer)
-        dataCall.readJSONFile()
-        
     }
     
+    
+    
+    
 
+    
+    
+    func getFlightData() async{
+        
+   //
+         let apiHandler = apiHandling(flightIATA: flightCode, delayed: 0)
+         apiHandler.getFlightData(flightIATA: flightCode) { flight in
+         if let flight = flight {
+         // Flight data retrieved successfully
+         // Access the flight object and perform desired operations
+         arrayHelper.addFlight(flight: flight)
+         } else {
+         // Error occurred or no flight data available
+         // Handle the error or absence of data
+         print("Failed to retrieve flight data.")
+         }
+         }
+    //
+         
+         
+        
+        
+/*
+         //JSON
+        let dataCall = apiHandling(flightIATA: flightCode, delayed: 0)
+               //dataCall.getFlightData(flightIATA: answer)
+              let test = dataCall.readJSONFile()
+        arrayHelper.addFlight(flight: (test)!)
+         */
+    }
 }
-
 struct FlightView_Previews: PreviewProvider {
     static var previews: some View {
         FlightView()

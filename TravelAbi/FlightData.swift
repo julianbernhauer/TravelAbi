@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Flight {
+struct Flight: Hashable {
     var sIATA: String
     var sDepartureAirport: String
     var sArrivalAirport: String
@@ -15,6 +15,6 @@ struct Flight {
     var sArrivaltime: String
     var delay: String
     static func preview() -> [Flight] {
-        [Flight(sIATA: "EW2520", sDepartureAirport: "STR", sArrivalAirport: "BCN", sDepartureTime: "x", sArrivaltime: "x", delay: "x")]
+        [Flight(sIATA: "EW2520", sDepartureAirport: "STR", sArrivalAirport: "BCN", sDepartureTime: "dep Time", sArrivaltime: "arrv Time", delay: "0")]
     }
 }
