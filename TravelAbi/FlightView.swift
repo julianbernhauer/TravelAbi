@@ -32,7 +32,7 @@ struct FlightView: View {
                                 
                                 Text("arrival: " + (FFlights.arr_Airport ?? "arrAirport NA")) + Text(" ") + Text(FFlights.arr_Time ?? "arrTime NA")
                             }
-                            Text("delay: ")
+                            Text("delay: ") + Text(FFlights.delay ?? "delay NA")
                         }
                         .swipeActions(edge: .trailing, allowsFullSwipe: false) {
                             Button(action: {
@@ -42,6 +42,9 @@ struct FlightView: View {
                             }
                             .tint(.red)
                         }
+                        .refreshable {
+                            
+                        }
                     }
                 }
                 
@@ -50,7 +53,7 @@ struct FlightView: View {
             .navigationTitle("Flights")
             .onSubmit {
                 Task{
-                    await testP()
+                    await getFlightData()
                 }
             }
         }
@@ -64,13 +67,21 @@ struct FlightView: View {
     func getFlightData() async{
         
         //
-        
+        let flight = Flights(context: moc)
         let apiHandler = apiHandling(flightIATA: flightCode, delayed: 0)
-        apiHandler.getFlightData(flightIATA: flightCode) { flight in
-            if let flight = flight {
+        apiHandler.getFlightData(flightIATA: flightCode) { plight in
+            if let plight = plight {
                 // Flight data retrieved successfully
                 // Access the flight object and perform desired operations
-                arrayHelper.addFlight(flight: flight)
+                arrayHelper.addFlight(flight: plight)
+                
+                flight.arr_Airport = plight.sArrivalAirport
+                flight.arr_Time = plight.sArrivaltime
+                flight.dep_Airport = plight.sDepartureAirport
+                flight.dep_Time = plight.sDepartureTime
+                flight.delay = plight.delay
+                
+                try? moc.save()
             } else {
                 // Error occurred or no flight data available
                 // Handle the error or absence of data
