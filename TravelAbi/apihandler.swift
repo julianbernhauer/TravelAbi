@@ -117,6 +117,7 @@ class apiHandling: ArrayHelper {
                 self.departure = request.dep_time ?? "depTime NA"
                 self.arrival = request.arr_time ?? "arrTime NA"
                 self.delayed = request.delayed ?? 0
+                self.flightIATA = request.flight_iata ?? "flightAITA NA"
                 
                 
                 let arrivalTime = self.formatDate(givenDateTime: self.arrival)
@@ -134,6 +135,9 @@ class apiHandling: ArrayHelper {
         
         return nil
     }
+    
+    
+
     
 }
 
