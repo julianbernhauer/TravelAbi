@@ -36,7 +36,7 @@ class apiHandling: ArrayHelper {
     
     func getFlightData(flightIATA: String, completion: @escaping (FlightModel?) -> Void) {
         let prefixURL = "https://airlabs.co/api/v9/flight?flight_iata="
-        let postfixURL = "&api_key=84070674-82b7-4c95-950e-219f4d310f95"
+        let postfixURL = "yourApiKeyHere"
         let combinedUrl = prefixURL + flightIATA + postfixURL
         
         guard let url = URL(string: combinedUrl) else {

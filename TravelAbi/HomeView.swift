@@ -18,7 +18,7 @@ struct HomeView: View {
                 VStack {
                     
                     Text("huh").padding(20)
-                    Image(systemName: "sun.max.fill")
+                    AdaptiveImage(light: Image(systemName: "sun.max.fill"), dark: Image(systemName: "moon"))
 
                     
                 } .background(Color.white)
@@ -29,6 +29,20 @@ struct HomeView: View {
 
 
 }
+struct AdaptiveImage: View {
+    @Environment(\.colorScheme) var colorScheme
+    let light: Image
+    let dark: Image
+
+    @ViewBuilder var body: some View {
+        if colorScheme == .light {
+            light
+        } else {
+            dark
+        }
+    }
+}
+
 
 struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
